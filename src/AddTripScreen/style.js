@@ -53,6 +53,16 @@ const styles = StyleSheet.create({
     color: '#24C6DC',
     fontWeight: 'bold',
   },
+  input: {
+    backgroundColor: '#E5E5E5',
+    padding: 20,
+    marginBottom: 16,
+  },
+  btn: {
+    backgroundColor: '#E5E5E5',
+    padding: 20,
+    marginBottom: 16,
+  },
 });
 
 export default styles;
