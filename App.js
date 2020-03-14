@@ -6,13 +6,14 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from './src/HomeScreen';
 import TripsScreen from './src/Trips';
+import TripScreen from './src/TripScreen';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Trips">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -21,6 +22,11 @@ const App = () => {
         <Stack.Screen
           name="Trips"
           component={TripsScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Trip"
+          component={TripScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

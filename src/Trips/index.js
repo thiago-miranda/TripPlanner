@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import Trip from './Trip';
+import isIphoneX from '../utils/IsIphoneX';
 
-const TripsScreen = () => {
-  const [trips, setTrips] = useState([
+const TripsScreen = ({navigation}) => {
+  const trips = [
     {
       id: '1',
       name: 'Eurotrip 2020',
@@ -14,10 +15,18 @@ const TripsScreen = () => {
       name: 'Expedição Atacama',
       price: 'R$ 3000',
     },
-  ]);
+  ];
 
   const renderItem = item => {
-    return <Trip title={item.item.name} price={item.item.price} />;
+    return (
+      <Trip
+        onPress={() => {
+          navigation.navigate('Trip');
+        }}
+        title={item.item.name}
+        price={item.item.price}
+      />
+    );
   };
 
   return (
@@ -37,6 +46,7 @@ const TripsScreen = () => {
             horizontal
             pagingEnabled
             keyExtractor={item => item.id}
+            style={[isIphoneX() ? {marginBottom: 20} : null]}
           />
         </View>
       </View>

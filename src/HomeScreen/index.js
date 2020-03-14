@@ -10,6 +10,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles';
 import assets from './assets';
+import isIphoneX from '../utils/IsIphoneX';
 
 const HomeScreen = ({navigation}) => {
   const [show, setShow] = useState(false);
@@ -34,7 +35,11 @@ const HomeScreen = ({navigation}) => {
           onPress={() => {
             handleShow();
           }}>
-          <View style={styles.buttonBackground}>
+          <View
+            style={[
+              styles.buttonBackground,
+              isIphoneX() ? {paddingBottom: 32} : null,
+            ]}>
             <Text style={styles.buttonText}>COMEÇAR!</Text>
           </View>
         </TouchableWithoutFeedback>
@@ -57,7 +62,7 @@ const HomeScreen = ({navigation}) => {
               name="arrow-right"
               color="black"
               size={20}
-              style={styles.arrow}
+              style={[styles.arrow, isIphoneX() ? {marginBottom: 16} : null]}
             />
           </View>
         </TouchableWithoutFeedback>
