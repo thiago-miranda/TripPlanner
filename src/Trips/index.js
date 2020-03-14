@@ -1,7 +1,9 @@
 import React from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import Trip from './Trip';
 import isIphoneX from '../utils/IsIphoneX';
+import MapView from 'react-native-maps';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const TripsScreen = ({navigation}) => {
   const trips = [
@@ -35,10 +37,23 @@ const TripsScreen = ({navigation}) => {
         flex: 1,
         justifyContent: 'space-between',
       }}>
-      <View style={{flex: 1, backgroundColor: 'red'}}>
-        <Text>Mapa</Text>
+      <View style={{flex: 1}}>
+        <MapView
+          style={{flex: 1}}
+          initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+        <TouchableOpacity
+          onPress={() => navigation.navigate('AddTrip')}
+          style={{position: 'absolute', bottom: 0, right: 20, padding: 10}}>
+          <MaterialIcons name="add-location" color="white" size={40} />
+        </TouchableOpacity>
       </View>
-      <View style={{backgroundColor: 'pink'}}>
+      <View>
         <View>
           <FlatList
             data={trips}
