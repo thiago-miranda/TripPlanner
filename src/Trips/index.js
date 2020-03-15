@@ -1,23 +1,25 @@
-import React from 'react';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, FlatList, TouchableOpacity} from 'react-native';
 import Trip from './Trip';
 import isIphoneX from '../utils/IsIphoneX';
 import MapView from 'react-native-maps';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const TripsScreen = ({navigation}) => {
-  const trips = [
-    {
-      id: '1',
-      name: 'Eurotrip 2020',
-      price: 'R$ 5000',
-    },
-    {
-      id: '2',
-      name: 'Expedição Atacama',
-      price: 'R$ 3000',
-    },
-  ];
+  const [trips, setTrips] = useState([]);
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    const tripsAS = await AsyncStorage.getItem('trips');
+    let trips = [];
+    if (tripsAS) {
+      trips = JSON.parse(tripsAS);
+    }
+    setTrips(trips);
+  };
 
   const renderItem = item => {
     return (
@@ -25,7 +27,7 @@ const TripsScreen = ({navigation}) => {
         onPress={() => {
           navigation.navigate('Trip');
         }}
-        title={item.item.name}
+        title={item.item.trip}
         price={item.item.price}
       />
     );
@@ -48,7 +50,7 @@ const TripsScreen = ({navigation}) => {
           }}
         />
         <TouchableOpacity
-          onPress={() => navigation.navigate('AddTrip')}
+          onPress={() => navigation.navigate('AddTrip', {refresh: loadData})}
           style={{position: 'absolute', bottom: 0, right: 20, padding: 10}}>
           <MaterialIcons name="add-location" color="white" size={40} />
         </TouchableOpacity>

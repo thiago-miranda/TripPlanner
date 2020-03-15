@@ -8,6 +8,7 @@ import HomeScreen from './src/HomeScreen';
 import TripsScreen from './src/Trips';
 import TripScreen from './src/TripScreen';
 import AddTripScreen from './src/AddTripScreen';
+import AddPointScreen from './src/AddPointScreen';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,11 @@ const App = () => {
         <Stack.Screen
           name="AddTrip"
           component={AddTripScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AddPoint"
+          component={AddPointScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
