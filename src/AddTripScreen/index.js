@@ -36,8 +36,7 @@ const AddTripScreen = ({route, navigation}) => {
     console.log('trip', trips);
     await AsyncStorage.setItem('trips', JSON.stringify(trips));
     //navigation.navigate('AddPoint', {id: newTrip.id});
-    const {refresh} = route.params;
-    navigation.goBack(refresh());
+    navigation.goBack(route.params.refresh());
   };
 
   return (

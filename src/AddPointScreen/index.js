@@ -25,20 +25,21 @@ const AddPointScreen = ({route, navigation}) => {
     latitude: 37.78825,
     longitude: -122.4324,
   });
-
+  const id = new Date().getTime();
   const [pointName, setPointName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
 
   const handleSave = async () => {
     console.log('id trip', id);
-    const id = 1584225435779;
+    const {id} = route.params;
+
     const pointsAS = await AsyncStorage.getItem('trip-' + id);
     let points = [];
     if (pointsAS) {
       points = JSON.parse(pointsAS);
     }
-    points.push({position, pointName, description, price});
+    points.push({position, pointName, description, price, id});
     await AsyncStorage.setItem('trip-' + id, JSON.stringify(points));
 
     let total = 0;
@@ -61,6 +62,7 @@ const AddPointScreen = ({route, navigation}) => {
     });
     console.log(trips);
     await AsyncStorage.setItem('trips', JSON.stringify(trips));
+    navigation.goBack(route.params.refresh());
   };
 
   return (
